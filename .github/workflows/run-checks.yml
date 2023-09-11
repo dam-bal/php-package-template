@@ -41,3 +41,9 @@ jobs:
 
       - name: Execute code style check
         run: vendor/bin/phpcs --standard=PSR12 src
+
+      - name: Execute PHP Lint
+        run: vendor/bin/phplint
+
+      - name: Execute mess detection
+        run: vendor/bin/phpmd src text unusedcode,codesize src
