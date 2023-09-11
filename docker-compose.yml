@@ -1,0 +1,70 @@
+services:
+  php-xdebug:
+    image: project-php
+    build:
+      dockerfile: .docker/Dockerfile
+      context: .
+    volumes:
+      - .:/usr/src/myapp
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      XDEBUG_SESSION: 1
+      PHP_IDE_CONFIG: "serverName=host.docker.internal"
+
+  php:
+    image: php:8.2-cli
+    working_dir: "/usr/src/myapp"
+    volumes_from:
+      - php-xdebug
+
+  composer:
+    image: composer:latest
+    volumes:
+      - .:/app
+
+  phpunit:
+    image: php:8.2-cli
+    working_dir: "/usr/src/myapp"
+    volumes_from:
+      - php-xdebug
+    entrypoint: "vendor/bin/phpunit"
+
+  phpunit-coverage:
+    image: project-php
+    volumes_from:
+      - php-xdebug
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      XDEBUG_SESSION: 1
+      PHP_IDE_CONFIG: "serverName=host.docker.internal"
+    command: "vendor/bin/phpunit --coverage-html coverage"
+
+  phpcs:
+    image: php:8.2-cli
+    working_dir: "/usr/src/myapp"
+    volumes_from:
+      - php-xdebug
+    command: "vendor/bin/phpcs --standard=PSR12 src"
+
+  phpstan:
+    image: php:8.2-cli
+    working_dir: "/usr/src/myapp"
+    volumes_from:
+      - php-xdebug
+    entrypoint: "vendor/bin/phpstan analyse"
+
+  phpmd:
+    image: php:8.2-cli
+    working_dir: "/usr/src/myapp"
+    volumes_from:
+      - php-xdebug
+    entrypoint: "vendor/bin/phpmd text unusedcode,codesize src"
+
+  phplint:
+    image: php:8.2-cli
+    working_dir: "/usr/src/myapp"
+    volumes_from:
+      - php-xdebug
+    entrypoint: "vendor/bin/phplint"
