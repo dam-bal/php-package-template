@@ -3,6 +3,7 @@
   "description": "Description",
   "license": "MIT",
   "type": "library",
+  "version": "1.0.0",
   "authors": [
     {
       "name": "Damian Balandowski",
@@ -20,7 +21,7 @@
     }
   },
   "require": {
-    "php": "^8.2"
+    "php": "^8.4"
   },
   "require-dev": {
     "mockery/mockery": "^1.6",
