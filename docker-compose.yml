@@ -48,6 +48,13 @@ services:
       - php-xdebug
     command: "vendor/bin/phpcs --standard=PSR12 src"
 
+  phpcbf:
+    image: php:8.4-cli
+    working_dir: "/usr/src/myapp"
+    volumes_from:
+      - php-xdebug
+    command: "vendor/bin/phpcbf --standard=PSR12 src"
+
   phpstan:
     image: php:8.4-cli
     working_dir: "/usr/src/myapp"
