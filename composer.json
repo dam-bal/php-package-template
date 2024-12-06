@@ -17,7 +17,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "VendorOrProject\\Tests\\": "tests/"
+      "Tests\\VendorOrProject\\": "tests/"
     }
   },
   "require": {

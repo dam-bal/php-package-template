@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorOrProject\Tests;
+namespace Tests\VendorOrProject;
 
 use PHPUnit\Framework\TestCase;
 use VendorOrProject\TestClass;
