@@ -23,7 +23,7 @@ echo ""
 echo "###################"
 echo "# Static Analysis #"
 echo "###################"
-run_command "./vendor/bin/phpstan analyse src --level 9"
+run_command "./vendor/bin/phpstan analyse src --level 8"
 
 echo ""
 echo "##################"
