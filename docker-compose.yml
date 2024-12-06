@@ -13,7 +13,7 @@ services:
       PHP_IDE_CONFIG: "serverName=host.docker.internal"
 
   php:
-    image: php:8.2-cli
+    image: php:8.4-cli
     working_dir: "/usr/src/myapp"
     volumes_from:
       - php-xdebug
@@ -24,7 +24,7 @@ services:
       - .:/app
 
   phpunit:
-    image: php:8.2-cli
+    image: php:8.4-cli
     working_dir: "/usr/src/myapp"
     volumes_from:
       - php-xdebug
@@ -42,28 +42,35 @@ services:
     command: "vendor/bin/phpunit --coverage-html coverage"
 
   phpcs:
-    image: php:8.2-cli
+    image: php:8.4-cli
     working_dir: "/usr/src/myapp"
     volumes_from:
       - php-xdebug
     command: "vendor/bin/phpcs --standard=PSR12 src"
 
+  phpcbf:
+    image: php:8.4-cli
+    working_dir: "/usr/src/myapp"
+    volumes_from:
+      - php-xdebug
+    command: "vendor/bin/phpcbf --standard=PSR12 src"
+
   phpstan:
-    image: php:8.2-cli
+    image: php:8.4-cli
     working_dir: "/usr/src/myapp"
     volumes_from:
       - php-xdebug
     entrypoint: "vendor/bin/phpstan analyse"
 
   phpmd:
-    image: php:8.2-cli
+    image: php:8.4-cli
     working_dir: "/usr/src/myapp"
     volumes_from:
       - php-xdebug
     entrypoint: "vendor/bin/phpmd src text unusedcode,codesize"
 
   phplint:
-    image: php:8.2-cli
+    image: php:8.4-cli
     working_dir: "/usr/src/myapp"
     volumes_from:
       - php-xdebug

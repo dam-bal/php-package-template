@@ -9,7 +9,7 @@ jobs:
       fail-fast: true
       matrix:
         os: [ ubuntu-latest ]
-        php: [ 8.2 ]
+        php: [ 8.4 ]
         stability: [ prefer-stable ]
 
     name: PHP-${{ matrix.php }} - ${{ matrix.stability }} - ${{ matrix.os }}
@@ -46,4 +46,4 @@ jobs:
         run: vendor/bin/phplint
 
       - name: Execute mess detection
-        run: vendor/bin/phpmd src text unusedcode,codesize src
+        run: vendor/bin/phpmd src/ text codesize,unusedcode,design,cleancode
